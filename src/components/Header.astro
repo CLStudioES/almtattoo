@@ -1,0 +1,145 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<script>
+    //Checkeamos la sección activa para modificar el color del navbar
+    const sections = document.querySelectorAll("section");
+    const trabajosLabel = document.getElementById("trabajosLabel");
+    const estudioLabel = document.getElementById("estudioLabel");
+    const serviciosLabel = document.getElementById("serviciosLabel");
+
+    const observer = new IntersectionObserver(handleIntersection, {
+        root: null,
+        rootMargin: "0px", // No margin
+        threshold: 0.25, // Varemo
+    });
+
+    sections.forEach((section) => {
+        observer.observe(section);
+    });
+
+    function handleIntersection(entries) {
+        const visibleSectionIds = [];
+        const active = ["text-clstudio-pink", "font-bold"];
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const sectionId = entry.target.id;
+                visibleSectionIds.push(sectionId);
+            }
+        });
+        if (visibleSectionIds[0] === "hero") {
+            // console.log("Hero");
+            trabajosLabel.classList.remove(...active);
+            estudioLabel.classList.remove(...active);
+            serviciosLabel.classList.remove(...active);
+        } else if (visibleSectionIds[0] === "trabajos") {
+            // console.log("Exp");
+            trabajosLabel.classList.add(...active);
+            estudioLabel.classList.remove(...active);
+            serviciosLabel.classList.remove(...active);
+        } else if (visibleSectionIds[0] === "estudio") {
+            // console.log("Skills");
+            trabajosLabel.classList.remove(...active);
+            estudioLabel.classList.add(...active);
+            serviciosLabel.classList.remove(...active);
+        } else if (visibleSectionIds[0] === "servicios") {
+            // console.log("Skills");
+            trabajosLabel.classList.remove(...active);
+            estudioLabel.classList.remove(...active);
+            serviciosLabel.classList.add(...active);
+        }
+    }
+
+    //Fin checkeo navbar
+</script>
+<script type='text/javascript"'>
+    //Comportamiento del scroll al clicar en opciones del navbar
+    const navLinks = document.querySelectorAll("nav a");
+
+    navLinks.forEach((link) => {
+        link.addEventListener("click", (event) => {
+            event.preventDefault(); // Prevent the default link behavior
+            const targetId = event.target.getAttribute("href");
+            const targetSection = document.querySelector(targetId);
+            targetSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start", // Align the top of the section with the top of the viewport
+                inline: "nearest", // Align the section horizontally with the nearest edge of the viewport
+            });
+        });
+    });
+    //Fin Comportamiento del scroll al clicar en opciones del navbar
+</script>
+<header
+    id="header"
+    class="z-40 w-[100%] font-light sticky top-0 backdrop-blur-lg lg:backdrop-blur-md transition-all duration-200 mx-auto"
+>
+    <div class="h-4 bg-otoño-moss sticky top-0 z-50"></div>
+    <div
+        class="container mx-auto flex flex-wrap px-5 py-2 flex-col md:flex-row items-center"
+    >
+        <a class="flex font-normal items-center text-gray-900 mb-4 md:mb-0">
+            <img class="h-auto w-14" src="/img/logos/almLogo.svg" />
+        </a>
+        <nav
+            class="md:ml-auto flex flex-wrap items-center tracking-wide justify-center"
+        >
+            <a
+                href="#trabajos"
+                id="trabajosLabel"
+                class="mr-5 font-light hover:scale-105 hover:font-normal transition-all duration-150 cursor-pointer"
+                >TRABAJOS</a
+            >
+            <a
+                href="#estudio"
+                id="estudioLabel"
+                class="mr-5 font-light hover:scale-105 hover:font-normal transition-all duration-150 cursor-pointer"
+                >ESTUDIO</a
+            >
+            <a
+                href="#servicios"
+                id="serviciosLabel"
+                class="mr-5 font-light hover:scale-105 hover:font-normal transition-all duration-150 cursor-pointer"
+                >SERVICIOS</a
+            >
+        </nav>
+    </div>
+</header>
+<style>
+    .glassmorphism {
+        background-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 25px 40px rgba(255, 255, 255, 0.1);
+        width: 90%;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+    }
+    .decoScroll {
+        width: 100%;
+    }
+</style>
+<script>
+    const header = document.getElementById("header");
+    const scrollThreshold = 25;
+    window.addEventListener("scroll", function () {
+        const scrollPosition =
+            window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollPosition >= scrollThreshold) {
+            header.classList.add("glassmorphism");
+        } else {
+            header.classList.remove("glassmorphism");
+        }
+    });
+    const headerDeco = document.getElementById("headerDeco");
+    window.addEventListener("scroll", function () {
+        const scrollPosition =
+            window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollPosition >= scrollThreshold) {
+            headerDeco.classList.add("decoScroll");
+        } else {
+            headerDeco.classList.remove("decoScroll");
+        }
+    });
+</script>

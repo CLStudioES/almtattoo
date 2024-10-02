@@ -1,0 +1,37 @@
+---
+import GenericButton from "../genericButton.astro";
+---
+
+<section id="Hero">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 h-auto md:h-[75vh]">
+        <div
+            class="col-span-1 md:col-span-3 p-4 h-64 md:h-auto relative overflow-hidden order-2 md:order-1"
+        >
+            <img
+                class="absolute inset-0 w-full h-full object-cover object-center"
+                src="https://img.freepik.com/premium-photo/cozy-home-autumn-living-room_874919-42.jpg"
+                alt="Cozy home autumn living room"
+            />
+        </div>
+
+        <div
+            class="col-span-1 flex flex-col justify-center md:px-16 items-center md:items-end py-4 order-1 md:order-2"
+        >
+            <h2
+                class="text-4xl handwritte font-extralight right-0 text-right pb-4"
+            >
+                ¡Destacado!
+            </h2>
+            <p
+                class="uppercase font-extralight text-right text-5xl tracking-wider"
+            >
+                <span class="block">Los</span>
+                <span class="block">Mejores</span>
+                <span class="block">Trabajos</span>
+            </p>
+            <div class="pr-1 mt-10">
+                <GenericButton title="VER TRABAJOS" />
+            </div>
+        </div>
+    </div>
+</section>
