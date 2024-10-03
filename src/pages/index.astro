@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Hero from "../components/index/Hero.astro";
+import Hero from "../components/Hero.astro";
 import Trabajos from "../sections/trabajos.astro";
 import Servicios from "../sections/servicios.astro";
 import Estudio from "../sections/estudio.astro";
@@ -10,11 +10,11 @@ import Estudio from "../sections/estudio.astro";
 	<main>
 		<Hero />
 		<slot />
+		<Servicios />
+		<slot />
 		<Trabajos />
 		<slot />
 		<Estudio />
-		<slot />
-		<Servicios />
 		<slot />
 	</main>
 </Layout>
